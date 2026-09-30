@@ -1,0 +1,18 @@
+# Dependencies and build output
+node_modules/
+dist/
+
+# Test screenshots and local reports
+artifacts/
+test-results/
+playwright-report/
+
+# Working notes stay local
+docs/
+AI_CONTEXT.md
+
+# Local environment and OS files
+.env
+.env.*
+.DS_Store
+*.log

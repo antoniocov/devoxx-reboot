@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101719">
+  <meta name="description" content="Record three robots. Replay one perfect plan. A short time-loop puzzle at Devoxx Belgium.">
+  <title>Devoxx Reboot — Three robots. One timeline.</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="src/main.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="Devoxx Reboot home"><span class="brand-mark">D<span>↗</span></span><span>DEVOXX<span class="brand-light">REBOOT</span></span></a>
+    <div class="edition">DEVOXX BELGIUM <span>/</span> ROBOT GAMES 2026</div>
+    <button id="help-button" class="quiet-button">How to play <span>?</span></button>
+  </header>
+
+  <main class="workspace">
+    <aside class="mission">
+      <div class="eyebrow"><span class="live-dot"></span> MISSION 01 · THE REHEARSAL</div>
+      <h1>The show<br> must go <em>on.</em></h1>
+      <p class="mission-intro">The cinema is dark. The keynote is waiting. You have three robots and one chance to get the timing right.</p>
+      <div class="section-heading"><span>YOUR CREW</span><span>SELECT / 1–3</span></div>
+      <div class="crew" role="group" aria-label="Select a robot">
+        <button class="robot-card selected" data-robot="0" aria-pressed="true"><span class="robot-portrait biggy"><i></i></span><span class="robot-copy"><strong>Biggy <small>01</small></strong><span>The heavyweight</span><b class="track-state">NO TAKE YET</b></span><span class="select-dot"></span></button>
+        <button class="robot-card" data-robot="1" aria-pressed="false"><span class="robot-portrait droid"><i></i></span><span class="robot-copy"><strong>Droid <small>02</small></strong><span>The connection</span><b class="track-state">NO TAKE YET</b></span><span class="select-dot"></span></button>
+        <button class="robot-card" data-robot="2" aria-pressed="false"><span class="robot-portrait voxxy"><i></i></span><span class="robot-copy"><strong>Voxxy <small>03</small></strong><span>The spark</span><b class="track-state">NO TAKE YET</b></span><span class="select-dot"></span></button>
+      </div>
+      <div class="assignment"><span class="eyebrow" id="assignment-label">BIGGY’S JOB</span><p id="assignment-text">Reach the orange pressure pad in Zaal 2. Press E to brace and hold the keynote door open.</p></div>
+      <div class="objectives" aria-label="Mission systems"><div id="door-status"><span>01</span><b>Keynote door</b><i>LOCKED</i></div><div id="power-status"><span>02</span><b>Power bridge</b><i>OFFLINE</i></div><div id="projector-status"><span>03</span><b>Projector</b><i>OFFLINE</i></div></div>
+      <p class="mission-footnote">THREE ROBOTS. ONE TIMELINE.</p>
+    </aside>
+
+    <section class="game-column" aria-label="Game and recording controls">
+      <div class="venue-bar"><div><span class="location-icon">⌖</span> KINEPOLIS ANTWERP <span class="muted">/ CINEMA LEVEL</span></div><span class="prototype-label">PLAYABLE PROTOTYPE</span></div>
+      <div class="viewport">
+        <canvas id="game" width="1100" height="720" tabindex="0" aria-label="Cinema map. Use WASD or arrow keys to move, E to interact, R to record or save, and Space to run all recordings."></canvas>
+        <div class="map-top"><span id="mode-label"><i></i> PLANNING MODE</span><span id="map-time">00.00 / 18.00</span></div>
+        <div class="map-caption"><span>↑ N</span><span>REHEARSAL FLOOR · ZAAL 1 / 2 / 11 / 12</span><span>01</span></div>
+        <div id="result" class="result-overlay" hidden>
+          <div class="result-card"><span class="eyebrow" id="result-eyebrow">ALL SYSTEMS GO</span><h2 id="result-title">Right on cue.</h2><p id="result-description"></p><button id="result-button" class="primary-button">Back to the plan <span>↗</span></button></div>
+        </div>
+      </div>
+      <div class="transport">
+        <div class="transport-message"><span class="status-light" id="status-light"></span><p id="status-message" role="status" aria-live="polite">Start with Biggy. Record a route to the orange pad.</p></div>
+        <div class="transport-buttons"><button id="record-button" class="record-button"><span class="record-dot"></span><span id="record-label">Record Biggy</span><kbd>R</kbd></button><button id="play-button" class="primary-button" disabled>Run the plan <span>▶</span></button><button id="stop-button" class="quiet-button" hidden>Stop <kbd>Esc</kbd></button></div>
+      </div>
+      <div class="timeline-panel">
+        <div class="section-heading"><span>THE SHARED TIMELINE</span><button id="reset-button" class="text-button">Clear all takes ↺</button></div>
+        <div class="timeline-scale"><span>00s</span><span>06s</span><span>12s</span><span>18s</span></div>
+        <div id="timeline-tracks">
+          <div class="timeline-row" data-track="0"><span>BIGGY</span><div class="track-lane"><canvas width="1000" height="24" aria-hidden="true"></canvas><b>Waiting for a recording</b><i class="playhead"></i></div></div>
+          <div class="timeline-row" data-track="1"><span>DROID</span><div class="track-lane"><canvas width="1000" height="24" aria-hidden="true"></canvas><b>Waiting for a recording</b><i class="playhead"></i></div></div>
+          <div class="timeline-row" data-track="2"><span>VOXXY</span><div class="track-lane"><canvas width="1000" height="24" aria-hidden="true"></canvas><b>Waiting for a recording</b><i class="playhead"></i></div></div>
+        </div>
+      </div>
+      <footer class="controls"><span><kbd>W A S D</kbd> / <kbd>↑ ↓ ← →</kbd> Move</span><span><kbd>E</kbd> Interact</span><span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> Crew</span><span><kbd>Space</kbd> Run</span><button id="sound-button" class="text-button" aria-pressed="false">Sound off ♫</button></footer>
+      <div class="touch-controls" aria-label="Touch controls"><div class="dpad"><button data-move="up" aria-label="Move up">↑</button><button data-move="left" aria-label="Move left">←</button><button data-move="down" aria-label="Move down">↓</button><button data-move="right" aria-label="Move right">→</button></div><button id="touch-action">E · Interact</button></div>
+    </section>
+  </main>
+  <dialog id="help-dialog">
+    <form method="dialog"><button class="dialog-close quiet-button" aria-label="Close instructions">×</button></form>
+    <span class="eyebrow">WELCOME TO THE REHEARSAL</span><h2>Be your own<br>dream team.</h2><p>Record one robot at a time. Every saved take replays from the beginning while you record the next robot.</p>
+    <ol><li><b>Biggy opens the way.</b> Record a route to the orange pad in Zaal 2. Press E to brace, then save.</li><li><b>Droid brings the power.</b> Record a route to the blue panel in Zaal 11. Press E to connect, then save.</li><li><b>Voxxy starts the show.</b> Record a route through the open door into Zaal 1. Reach the projector and press E, then save.</li></ol>
+    <p>Use WASD or the arrow keys to move. Press R to record and save. An interaction stays active until you move. Saved robots wait at their last position for the rest of the 18 seconds.</p><p>Finally, <b>run the plan</b>. All three jobs must overlap to bring the screen to life. Re-record any take to improve your timing.</p><form method="dialog"><button class="primary-button">Let’s rehearse <span>↗</span></button></form>
+  </dialog>
+</body>
+</html>
